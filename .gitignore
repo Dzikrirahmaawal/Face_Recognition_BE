@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+build/
+dist/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Testing and tooling
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Local data
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python virtual environment
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Face recognition and biometric data
+datasets/
+known_faces/
+face_images/
+face_data/
+face_embeddings/
+embeddings/
+captures/
+uploads/
+
+# Credentials and certificates
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Database backups
+*.bak
+*.dump

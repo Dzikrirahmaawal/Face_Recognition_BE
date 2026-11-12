@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Face Attendance Camera Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <h1>Face Attendance Camera Lab</h1>
+        <p class="subtitle">Development-only client for exercising enrollment, identification, liveness, and attendance.</p>
+      </div>
+      <span class="badge">Not for production</span>
+    </header>
+
+    <main class="layout">
+      <section class="panel settings-panel">
+        <h2>Connection</h2>
+        <div class="field-grid">
+          <label>
+            API base URL
+            <input id="apiBase" type="url" placeholder="http://localhost:8000" autocomplete="off" />
+          </label>
+          <label>
+            Kiosk token
+            <input id="kioskToken" type="password" placeholder="kiosk_..." autocomplete="off" />
+          </label>
+        </div>
+        <div class="row">
+          <button id="saveSettings" class="primary">Save settings</button>
+          <span id="connectionState" class="muted">Not configured</span>
+        </div>
+        <p class="hint">
+          Create a kiosk with an admin token, then paste the one-time device token here. The token is stored in
+          localStorage on this development machine.
+        </p>
+      </section>
+
+      <section class="grid-two">
+        <div class="panel">
+          <h2>Camera</h2>
+          <div class="video-frame">
+            <video id="video" autoplay playsinline muted></video>
+            <div id="cameraPlaceholder" class="camera-placeholder">Camera is off</div>
+          </div>
+          <div class="row">
+            <button id="startCamera" class="primary">Start camera</button>
+            <button id="stopCamera">Stop</button>
+          </div>
+          <p class="hint">Camera access requires localhost or HTTPS. The browser may ask for permission.</p>
+        </div>
+
+        <div class="panel">
+          <h2>Enrollment</h2>
+          <form id="enrollForm">
+            <label>
+              Full name
+              <input id="fullName" required maxlength="150" placeholder="Visitor name" />
+            </label>
+            <label>
+              Company
+              <input id="companyName" maxlength="150" placeholder="Optional" />
+            </label>
+            <label>
+              Phone
+              <input id="phoneNumber" maxlength="30" placeholder="Optional" />
+            </label>
+            <label class="checkbox-row">
+              <input id="consentGranted" type="checkbox" required />
+              <span>Visitor consents to biometric processing for this test.</span>
+            </label>
+            <label>
+              Policy version
+              <input id="policyVersion" value="1.0" maxlength="50" />
+            </label>
+            <button type="submit" class="primary" id="enrollButton">Capture and enroll</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Actions</h2>
+        <div class="row wrap">
+          <button id="identifyButton" class="primary">Identify</button>
+          <button id="livenessButton">Liveness check</button>
+          <button id="verifyButton">Verify visitor</button>
+          <button id="checkInButton">Check in</button>
+          <button id="checkOutButton">Check out</button>
+        </div>
+        <div class="field-grid three">
+          <label>
+            Visitor ID
+            <input id="visitorId" placeholder="Auto-filled after a match" autocomplete="off" />
+          </label>
+          <label>
+            Verify against visitor ID
+            <input id="verifyVisitorId" placeholder="Optional" autocomplete="off" />
+          </label>
+          <label>
+            Attendance method
+            <select id="attendanceMethod">
+              <option value="FACE">FACE</option>
+              <option value="MANUAL">MANUAL</option>
+            </select>
+          </label>
+        </div>
+        <p class="hint">
+          Identify fills the visitor ID when the API returns MATCHED. Check-in and check-out send an
+          Idempotency-Key so repeated clicks are handled safely.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="row space-between">
+          <h2>Result</h2>
+          <button id="clearOutput">Clear</button>
+        </div>
+        <pre id="output" class="output">Ready.</pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Use only with consenting test subjects and non-production data.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
